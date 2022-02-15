@@ -25,7 +25,7 @@ function FoodBox ({food}){
     <div className="media-right">
       <div className="field has-addons">
         <div className="control">
-          <input className="input" type="number" value={food.quantity} />
+          <input className="input" type="number" defaultValue={food.quantity} />
         </div>
         <div className="control">
           <button className="button is-info">

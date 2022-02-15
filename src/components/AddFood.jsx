@@ -29,7 +29,7 @@ function AddFood(props){
 
             <label>Calories: </label>
             <input 
-                type="text" 
+                type="number" 
                 name="calories" 
                 value={calories} 
                 onChange={handleCaloriesInput}
