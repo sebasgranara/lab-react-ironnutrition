@@ -5,10 +5,12 @@ import foodsJSON from './foods.json';
 import FoodBox from './components/FoodBox';
 import AddFood from './components/AddFood';
 import SearchBar from './components/SearchBar';
+import TodayFood from './components/TodayFood';
 
 
 function App () {
     const [foods, setFoods] = useState(foodsJSON)
+    const [todayFood, setTodayFood] = useState([]);
 
     const addNewFood = (newFood) => {
         const updatedFood = [newFood, ...foods]
@@ -27,19 +29,37 @@ function App () {
         }
       };
 
+      const [isVisible, setVisible] = useState(false);
+      const handleVisibility = () => {
+        setVisible((isVisible) => !isVisible);
+      };
+
+      const addTodayFood = (today) => {
+        const todayMenu = [...todayFood, today];
+        setTodayFood(todayMenu);
+      };
+
     return (
         <div className="App">
 
-        <AddFood addFood={addNewFood} />
+          <h1> IronNutrition</h1>
 
-        <SearchBar handleInput={handleInput}/>
+          <SearchBar handleInput={handleInput}/>
 
-        {foods.map((food, index) =>{
+          <div className={isVisible ? 'block' : 'none'}> 
+            <AddFood handleVisibility={handleVisibility} addNewFood={addNewFood} />
+          </div>
+
+           <button className={isVisible ? 'none' : 'block'} onClick={handleVisibility}>Add new food</button>
+
+
+          {foods.map((food, index) =>{
             return (
-                <FoodBox key={index} food = {food} />
+                <FoodBox key={index} food = {food} addTodayFood={addTodayFood} />
              )  
         })}
-    
+        <TodayFood todayFood={todayFood} />
+
         </div>
     )
 }

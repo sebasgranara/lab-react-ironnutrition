@@ -1,10 +1,18 @@
 import React from "react";
 import 'bulma/css/bulma.css';
 
-function FoodBox ({food}){
+function FoodBox ({food, addTodayFood}){
 
     // const [name, calories, image, quantity] = food
     // console.log(food)
+
+    const handleTodayFood = () => {
+      addTodayFood({
+        name: food.name,
+        calories: food.calories,
+        quantity: food.quantity,
+      });
+    };
 
     return (
         <div className="box">
@@ -28,7 +36,7 @@ function FoodBox ({food}){
           <input className="input" type="number" defaultValue={food.quantity} />
         </div>
         <div className="control">
-          <button className="button is-info">
+          <button className="button is-info" onClick={handleTodayFood}>
             +
           </button>
         </div>

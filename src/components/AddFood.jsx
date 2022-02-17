@@ -1,9 +1,9 @@
 import React, {useState}  from "react";
 
-function AddFood(props){
+function AddFood({handleVisibility, addNewFood}){
     const [name, setName] = useState("")
     const [calories, setCalories] = useState(0)
-    const [visible, setVisible] = useState(false)
+    // const [visible, setVisible] = useState(false)
 
     const handleNameInput = e => setName(e.target.value);
     const handleCaloriesInput = e => setCalories(e.target.value);
@@ -11,11 +11,13 @@ function AddFood(props){
     const handleSubmit = (e) => {        
         e.preventDefault();
         const newFood = { name, calories };
- 
+        addNewFood(newFood)
+    
     console.log("Submitted: ", newFood);
-    props.addFood(newFood)
+    setName('');
+    setCalories(0)
   }
-    if(visible){
+    // if(visible){
     return (
         <form onSubmit={handleSubmit}>
             <label>Name: </label>
@@ -35,15 +37,17 @@ function AddFood(props){
                 onChange={handleCaloriesInput}
             />
             <span>   </span>
-            <button  type="submit">Add Food</button>
-       {/* onClick={()=>setVisible(false)} */}
+            <button onClick={handleVisibility} type="submit">
+                Add Food</button>
+            {/* <button onClick={()=>setVisible(false)} type="submit">Add Food</button> */}
        
         </form>
-    )}
-    return(
-        <button onClick={()=> setVisible(true)} type="submit">Add new Food</button>
-      
     )
 }
+    // return(
+    //     <button onClick={()=> setVisible(true)} type="submit">Add new Food</button>
+      
+    // )
+// }
 
 export default AddFood;
